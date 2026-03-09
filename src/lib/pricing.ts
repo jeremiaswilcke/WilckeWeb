@@ -35,7 +35,42 @@ export interface SupportOption {
   price: number;
 }
 
+export interface SystemOption {
+  value: string;
+  label: string;
+  hint: string;
+  price: number;
+}
+
 export const PRICING = {
+  // Technisches System
+  systems: [
+    {
+      value: "headless-wp",
+      label: "Next.js + Headless WordPress",
+      hint: "Schnell, modern, flexibel — unser Schwerpunkt",
+      price: 0,
+    },
+    {
+      value: "nextjs-static",
+      label: "Next.js (statisch)",
+      hint: "Ideal für schlanke Seiten ohne CMS",
+      price: 0,
+    },
+    {
+      value: "wordpress",
+      label: "Klassisches WordPress",
+      hint: "Bewährt, einfach selbst zu pflegen",
+      price: 0,
+    },
+    {
+      value: "other",
+      label: "Anderes System",
+      hint: "Shopify, Webflow, individuell — auf Anfrage",
+      price: 0,
+    },
+  ] as SystemOption[],
+
   // Grundpreise nach Seitenanzahl
   pages: {
     onepager: { label: "Onepager", price: 790 },
@@ -91,6 +126,7 @@ export const PRICING = {
     { id: "multilang", label: "Mehrsprachigkeit", price: 490 },
     { id: "donation", label: "Spendenfunktion", price: 190 },
     { id: "members", label: "Mitgliederbereich", price: 590 },
+    { id: "wp-plugin", label: "Individuelles WP-Plugin", price: 490 },
     { id: "seo", label: "SEO-Basisoptimierung", price: 190 },
     { id: "dsgvo", label: "DSGVO / Cookie-Setup", price: 140 },
     { id: "social", label: "Social Media Einbindung", price: 90 },

@@ -1,33 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { PRICING, formatPrice } from "@/lib/pricing";
+import { useProject } from "@/lib/ProjectContext";
 import FadeIn from "./FadeIn";
 import { ArrowRightIcon } from "./Icons";
 
-interface CalcState {
-  pages: string;
-  materials: Record<string, string>;
-  features: string[];
-  design: string;
-  support: string;
-}
-
 export default function Calculator() {
-  const [state, setState] = useState<CalcState>({
-    pages: "onepager",
-    materials: { logo: "yes", ci: "yes", texte: "yes", bilder: "yes" },
-    features: ["kontakt"],
-    design: "pro",
-    support: "none",
-  });
+  const { state, setState } = useProject();
 
   const setPages = (v: string) => setState((s) => ({ ...s, pages: v }));
   const setMaterial = (key: string, v: string) =>
-    setState((s) => ({
-      ...s,
-      materials: { ...s.materials, [key]: v },
-    }));
+    setState((s) => ({ ...s, materials: { ...s.materials, [key]: v } }));
   const toggleFeature = (id: string) =>
     setState((s) => ({
       ...s,
@@ -37,18 +21,16 @@ export default function Calculator() {
     }));
   const setDesign = (v: string) => setState((s) => ({ ...s, design: v }));
   const setSupport = (v: string) => setState((s) => ({ ...s, support: v }));
+  const setSystem = (v: string) => setState((s) => ({ ...s, system: v }));
 
-  // Price calculation
   const { total, breakdown, monthly } = useMemo(() => {
     const items: { label: string; value: number }[] = [];
     let sum = 0;
 
-    // Base
     const pg = PRICING.pages[state.pages];
     sum += pg.price;
     items.push({ label: pg.label, value: pg.price });
 
-    // Materials
     Object.entries(state.materials).forEach(([key, val]) => {
       const mat = PRICING.materials[key];
       const opt = mat.options.find((o) => o.value === val);
@@ -58,7 +40,6 @@ export default function Calculator() {
       }
     });
 
-    // Features
     state.features.forEach((id) => {
       const feat = PRICING.features.find((f) => f.id === id);
       if (feat && feat.price > 0) {
@@ -67,16 +48,19 @@ export default function Calculator() {
       }
     });
 
-    // Design
     const des = PRICING.design.find((d) => d.value === state.design);
     if (des && des.price > 0) {
       sum += des.price;
       items.push({ label: "Premium-Design", value: des.price });
     }
 
-    // Support
-    const sup = PRICING.support.find((s) => s.value === state.support);
+    const sys = PRICING.systems.find((s) => s.value === state.system);
+    if (sys && sys.price > 0) {
+      sum += sys.price;
+      items.push({ label: sys.label, value: sys.price });
+    }
 
+    const sup = PRICING.support.find((s) => s.value === state.support);
     return { total: sum, breakdown: items, monthly: sup?.price ?? 0 };
   }, [state]);
 
@@ -96,8 +80,7 @@ export default function Calculator() {
             </h2>
             <p className="text-muted text-[1.05rem] leading-relaxed mt-4">
               Konfigurieren Sie Ihre Website und erhalten Sie sofort eine
-              transparente Preiseinschätzung. Unverbindlich und in wenigen
-              Klicks.
+              transparente Preiseinschätzung. Unverbindlich und in wenigen Klicks.
             </p>
           </div>
         </FadeIn>
@@ -105,6 +88,22 @@ export default function Calculator() {
         <div className="grid grid-cols-[1.35fr_0.65fr] gap-10 items-start max-lg:grid-cols-1">
           {/* Form */}
           <div className="grid gap-10">
+            {/* System */}
+            <CalcGroup title="Technisches System" subtitle="Welche Technologie soll zum Einsatz kommen?">
+              <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+                {PRICING.systems.map((sys) => (
+                  <RadioCard
+                    key={sys.value}
+                    selected={state.system === sys.value}
+                    onClick={() => setSystem(sys.value)}
+                    label={sys.label}
+                    hint={sys.hint}
+                    price={sys.price > 0 ? `+ ${formatPrice(sys.price)}` : undefined}
+                  />
+                ))}
+              </div>
+            </CalcGroup>
+
             {/* Pages */}
             <CalcGroup title="Umfang der Website" subtitle="Wie umfangreich soll Ihre Website werden?">
               <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
@@ -223,7 +222,6 @@ export default function Calculator() {
                 Einmalige Projektkosten (netto)
               </div>
 
-              {/* Breakdown */}
               <div className="mb-6">
                 {breakdown.map((item, i) => (
                   <div
@@ -231,26 +229,18 @@ export default function Calculator() {
                     className="flex justify-between items-center gap-3 py-2.5 text-[0.88rem] border-b border-white/8 last:border-b-0"
                   >
                     <span className="text-white/65">{item.label}</span>
-                    <span className="font-semibold whitespace-nowrap">
-                      {formatPrice(item.value)}
-                    </span>
+                    <span className="font-semibold whitespace-nowrap">{formatPrice(item.value)}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Monthly */}
               {monthly > 0 && (
                 <div className="bg-white/8 rounded-2xl p-4 mb-5">
-                  <div className="text-[0.82rem] text-white/55 mb-1">
-                    Monatliche Betreuung
-                  </div>
-                  <div className="text-xl font-bold">
-                    {formatPrice(monthly)} / Monat
-                  </div>
+                  <div className="text-[0.82rem] text-white/55 mb-1">Monatliche Betreuung</div>
+                  <div className="text-xl font-bold">{formatPrice(monthly)} / Monat</div>
                 </div>
               )}
 
-              {/* Note */}
               <div className="text-[0.8rem] text-white/45 leading-relaxed py-3.5 border-t border-white/8">
                 Dies ist ein unverbindlicher Richtpreis. Ein genaues Angebot
                 erhalten Sie nach einem kurzen Erstgespräch.
@@ -262,7 +252,7 @@ export default function Calculator() {
                   bg-coral text-white hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,125,115,0.3)]
                   transition-all duration-300"
               >
-                Projekt anfragen
+                Jetzt Projekt anfragen
                 <ArrowRightIcon />
               </a>
             </div>
@@ -273,76 +263,32 @@ export default function Calculator() {
   );
 }
 
-/* ---------- Sub-components ---------- */
-
-function CalcGroup({
-  title,
-  subtitle,
-  children,
-}: {
-  title: string;
-  subtitle?: string;
-  children: React.ReactNode;
-}) {
+function CalcGroup({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold tracking-tight mb-2">
-        {title}
-      </h3>
-      {subtitle && (
-        <p className="text-muted text-[0.9rem] mb-5">{subtitle}</p>
-      )}
+      <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold tracking-tight mb-2">{title}</h3>
+      {subtitle && <p className="text-muted text-[0.9rem] mb-5">{subtitle}</p>}
       {!subtitle && <div className="mb-5" />}
       {children}
     </div>
   );
 }
 
-function RadioCard({
-  selected,
-  onClick,
-  label,
-  hint,
-  price,
-}: {
-  selected: boolean;
-  onClick: () => void;
-  label: string;
-  hint?: string;
-  price?: string;
-}) {
+function RadioCard({ selected, onClick, label, hint, price }: { selected: boolean; onClick: () => void; label: string; hint?: string; price?: string }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={`flex items-start gap-3 py-4 px-5 rounded-2xl border text-left transition-all duration-300 cursor-pointer w-full
-        ${
-          selected
-            ? "border-teal bg-white shadow-[0_0_0_1px_var(--color-teal)]"
-            : "border-line bg-bg-soft hover:border-line-strong hover:bg-white"
-        }`}
+        ${selected ? "border-teal bg-white shadow-[0_0_0_1px_var(--color-teal)]" : "border-line bg-bg-soft hover:border-line-strong hover:bg-white"}`}
     >
-      {/* Radio dot */}
-      <span
-        className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all duration-300
-          ${selected ? "border-teal bg-teal" : "border-line-strong"}`}
-      >
+      <span className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all duration-300 ${selected ? "border-teal bg-teal" : "border-line-strong"}`}>
         {selected && <span className="w-2 h-2 rounded-full bg-white" />}
       </span>
       <span>
-        <span className="block font-semibold text-[0.92rem] leading-snug">
-          {label}
-        </span>
-        {hint && (
-          <span className="block text-[0.82rem] text-muted mt-0.5 leading-snug">
-            {hint}
-          </span>
-        )}
-        {price && (
-          <span className="block text-[0.78rem] font-semibold text-teal mt-1">
-            {price}
-          </span>
-        )}
+        <span className="block font-semibold text-[0.92rem] leading-snug">{label}</span>
+        {hint && <span className="block text-[0.82rem] text-muted mt-0.5 leading-snug">{hint}</span>}
+        {price && <span className="block text-[0.78rem] font-semibold text-teal mt-1">{price}</span>}
       </span>
     </button>
   );

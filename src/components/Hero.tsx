@@ -13,9 +13,9 @@ export default function Hero() {
       <div className="max-w-[1200px] mx-auto px-6 w-full">
         <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 items-center max-lg:grid-cols-1 max-lg:gap-12">
           {/* Copy */}
-          <div className="max-w-[620px]">
+          <div className="max-w-[640px]">
             <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">
-              Webdesign mit Klarheit
+              WilckeWeb &middot; Webdesign & Entwicklung
             </span>
             <FadeIn>
               <h1 className="text-[clamp(2.8rem,5.5vw,4.5rem)] font-bold leading-[1.08] tracking-tight mb-6">
@@ -24,10 +24,15 @@ export default function Hero() {
               </h1>
             </FadeIn>
             <FadeIn delay={1}>
-              <p className="text-lg text-muted leading-relaxed max-w-[48ch] mb-10">
+              <p className="text-lg text-muted leading-relaxed max-w-[52ch] mb-5">
                 Klar geplant, fair kalkuliert, individuell umgesetzt. WilckeWeb
                 begleitet Sie von der ersten Idee bis zur fertigen Website —
                 persönlich, transparent und ohne Techniksprech.
+              </p>
+              <p className="text-[0.92rem] text-muted/80 leading-relaxed max-w-[52ch] mb-10">
+                Unser Schwerpunkt: <strong className="text-text font-semibold">Next.js mit Headless WordPress</strong> —
+                blitzschnelle Ladezeiten, maximale Flexibilität und ein CMS, das Sie selbst bedienen können.
+                Auf Wunsch auch mit individuellen WordPress-Plugins oder anderen Systemen.
               </p>
             </FadeIn>
             <FadeIn delay={2}>
@@ -57,16 +62,13 @@ export default function Hero() {
           {/* Visual Card */}
           <FadeIn delay={3} className="max-lg:max-w-[480px]">
             <div className="relative">
-              <div
-                className="bg-surface/94 border border-line rounded-3xl p-10 shadow-[0_24px_60px_rgba(63,63,63,0.1)]
-                  relative z-10"
-              >
+              <div className="bg-surface/94 border border-line rounded-3xl p-10 shadow-[0_24px_60px_rgba(63,63,63,0.1)] relative z-10">
                 <div className="grid gap-5">
                   <Stat
                     icon={<LayoutIcon />}
                     iconClass="bg-teal/8 text-teal"
-                    label="Projekttypen"
-                    value="Onepager bis Multiseiten"
+                    label="Technologie"
+                    value="Next.js + Headless WordPress"
                   />
                   <Stat
                     icon={<DollarIcon />}
@@ -84,12 +86,11 @@ export default function Hero() {
                     icon={<CheckCircleIcon />}
                     iconClass="bg-coral/10 text-coral"
                     label="Ergebnis"
-                    value="Modern, responsiv, DSGVO-konform"
+                    value="Schnell, sicher, individuell"
                     last
                   />
                 </div>
               </div>
-              {/* Glow */}
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-coral/12 to-teal/8 blur-[40px] -z-10" />
             </div>
           </FadeIn>
@@ -100,27 +101,13 @@ export default function Hero() {
 }
 
 function Stat({
-  icon,
-  iconClass,
-  label,
-  value,
-  last,
+  icon, iconClass, label, value, last,
 }: {
-  icon: React.ReactNode;
-  iconClass: string;
-  label: string;
-  value: string;
-  last?: boolean;
+  icon: React.ReactNode; iconClass: string; label: string; value: string; last?: boolean;
 }) {
   return (
-    <div
-      className={`flex items-center gap-4 py-4 ${
-        !last ? "border-b border-line" : ""
-      }`}
-    >
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${iconClass}`}
-      >
+    <div className={`flex items-center gap-4 py-4 ${!last ? "border-b border-line" : ""}`}>
+      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${iconClass}`}>
         {icon}
       </div>
       <div>
