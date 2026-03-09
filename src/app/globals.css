@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   WilckeWeb — Custom Design Tokens
+   Brand: Anthracite #3F3F3F · Teal #56A0A8 · Coral #F97D73
+   ========================================================================== */
+
+@theme {
+  --color-bg: #f6f3ef;
+  --color-bg-soft: #faf8f5;
+  --color-surface: #ffffff;
+  --color-anthracite: #3F3F3F;
+  --color-anthracite-light: #5a5a5a;
+  --color-teal: #56A0A8;
+  --color-teal-dark: #478a91;
+  --color-teal-light: #d4eaed;
+  --color-coral: #F97D73;
+  --color-coral-dark: #e56b61;
+  --color-coral-light: #fde8e6;
+  --color-text: #2a2a2a;
+  --color-text-soft: #3F3F3F;
+  --color-muted: #6b6b6b;
+  --color-line: rgba(63, 63, 63, 0.08);
+  --color-line-strong: rgba(63, 63, 63, 0.16);
+  --font-sans: "Inter", "SF Pro Display", "Segoe UI", "Helvetica Neue", -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(249, 125, 115, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(86, 160, 168, 0.05) 0%, transparent 50%);
+}
+
+/* ==========================================================================
+   Scroll-triggered fade-in
+   ========================================================================== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
