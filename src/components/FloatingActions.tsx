@@ -9,7 +9,7 @@ export default function FloatingActions() {
   const [formSent, setFormSent] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "436767923929";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
