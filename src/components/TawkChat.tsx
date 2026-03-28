@@ -8,7 +8,7 @@ export default function TawkChat() {
       id="tawk-to"
       strategy="lazyOnload"
       src="https://embed.tawk.to/69c860c0a553521c36a635ec/1jkrbjsc1"
-      crossOrigin="*"
+      crossOrigin="anonymous"
     />
   );
 }
