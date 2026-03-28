@@ -8,6 +8,7 @@ import ContactForm from "@/components/ContactForm";
 import Technology from "@/components/Technology";
 import Examples from "@/components/Examples";
 import Trust from "@/components/Trust";
+import AboutMe from "@/components/AboutMe";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import { ProjectProvider } from "@/lib/ProjectContext";
@@ -26,6 +27,7 @@ export default function Home() {
         <Technology />
         <Examples />
         <Trust />
+        <AboutMe />
         <FinalCTA />
       </main>
       <Footer />
