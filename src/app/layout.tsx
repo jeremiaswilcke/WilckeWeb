@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import FloatingActions from "@/components/FloatingActions";
+import TawkChat from "@/components/TawkChat";
 import CookieBanner from "@/components/CookieBanner";
 import StructuredData from "@/components/StructuredData";
 
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body className="antialiased">
         {children}
         <FloatingActions />
+        <TawkChat />
         <CookieBanner />
       </body>
     </html>

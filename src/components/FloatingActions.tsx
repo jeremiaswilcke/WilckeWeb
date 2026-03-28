@@ -3,18 +3,10 @@
 import { useState } from "react";
 
 export default function FloatingActions() {
-  const [chatOpen, setChatOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formSent, setFormSent] = useState(false);
   const [sending, setSending] = useState(false);
-
-  // Chat (Telegram direct)
-  const [chatMessage, setChatMessage] = useState("");
-  const [chatName, setChatName] = useState("");
-  const [chatEmail, setChatEmail] = useState("");
-  const [chatSent, setChatSent] = useState(false);
-  const [chatSending, setChatSending] = useState(false);
 
   const waNumber = "436767923929";
 
@@ -43,31 +35,13 @@ export default function FloatingActions() {
     }
   }
 
-  async function handleChatSend() {
-    if (!chatMessage.trim() || !chatEmail.trim()) return;
-    setChatSending(true);
-    try {
-      const res = await fetch("/api/telegram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: chatMessage, name: chatName, email: chatEmail }),
-      });
-      if (res.ok) {
-        setChatSent(true);
-        setChatMessage("");
-      }
-    } finally {
-      setChatSending(false);
-    }
-  }
-
   return (
     <>
       {/* Fixed right sidebar buttons */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-3 pr-4 max-md:pr-2">
         {/* Contact Form Toggle */}
         <button
-          onClick={() => { setFormOpen(!formOpen); setChatOpen(false); }}
+          onClick={() => setFormOpen(!formOpen)}
           className={`group w-12 h-12 max-md:w-10 max-md:h-10 rounded-full flex items-center justify-center
             shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300
             ${formOpen
@@ -87,28 +61,6 @@ export default function FloatingActions() {
           )}
         </button>
 
-        {/* Chat (Telegram) Toggle */}
-        <button
-          onClick={() => { setChatOpen(!chatOpen); setFormOpen(false); }}
-          className={`group w-12 h-12 max-md:w-10 max-md:h-10 rounded-full flex items-center justify-center
-            shadow-[0_4px_20px_rgba(86,160,168,0.3)] transition-all duration-300
-            ${chatOpen
-              ? "bg-teal-dark text-white"
-              : "bg-teal text-white hover:scale-110 hover:shadow-[0_6px_28px_rgba(86,160,168,0.5)]"
-            }`}
-          aria-label="Kontakt über Telegram"
-        >
-          {chatOpen ? (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-            </svg>
-          )}
-        </button>
-
         {/* WhatsApp Link */}
         <a
           href={`https://wa.me/${waNumber}`}
@@ -124,90 +76,6 @@ export default function FloatingActions() {
           </svg>
         </a>
       </div>
-
-      {/* Chat Flyout (Telegram-powered) */}
-      {chatOpen && (
-        <div className="fixed right-20 max-md:right-16 top-1/2 -translate-y-1/2 z-[99] animate-scaleIn">
-          <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] border border-line w-[320px] overflow-hidden">
-            <div className="bg-teal text-white px-5 py-4">
-              <div className="font-bold text-[0.95rem]">Kontakt über Telegram</div>
-              <div className="text-white/80 text-[0.8rem]">Antwort meistens innerhalb einer Stunde</div>
-            </div>
-            <div className="p-5">
-              {chatSent ? (
-                <div className="py-4 text-center">
-                  <div className="w-12 h-12 rounded-full bg-teal/10 text-teal flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <p className="font-semibold text-text">Nachricht gesendet!</p>
-                  <p className="text-muted text-[0.85rem] mt-1">Wir antworten so schnell wie m&ouml;glich.</p>
-                  <button
-                    onClick={() => setChatSent(false)}
-                    className="mt-3 text-[0.82rem] text-teal font-semibold hover:underline"
-                  >
-                    Weitere Nachricht senden
-                  </button>
-                </div>
-              ) : (
-                <div className="grid gap-3">
-                  <div className="bg-bg-soft rounded-xl p-3">
-                    <p className="text-[0.82rem] text-text leading-relaxed">
-                      Schreiben Sie uns direkt — Ihre Nachricht kommt sofort an.
-                    </p>
-                  </div>
-                  <input
-                    type="text"
-                    value={chatName}
-                    onChange={(e) => setChatName(e.target.value)}
-                    placeholder="Ihr Name (optional)"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
-                      focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
-                  />
-                  <input
-                    type="email"
-                    required
-                    value={chatEmail}
-                    onChange={(e) => setChatEmail(e.target.value)}
-                    placeholder="Ihre E-Mail-Adresse"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
-                      focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
-                  />
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={chatMessage}
-                      onChange={(e) => setChatMessage(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && chatMessage.trim()) handleChatSend();
-                      }}
-                      placeholder="Ihre Nachricht..."
-                      className="flex-1 px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
-                        focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
-                    />
-                    <button
-                      onClick={handleChatSend}
-                      disabled={chatSending || !chatMessage.trim() || !chatEmail.trim()}
-                      className="w-11 h-11 shrink-0 rounded-full bg-teal text-white flex items-center justify-center
-                        hover:scale-105 hover:shadow-[0_4px_16px_rgba(86,160,168,0.4)]
-                        transition-all duration-300 disabled:opacity-40"
-                    >
-                      {chatSending ? (
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      ) : (
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                        </svg>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Contact Form Flyout */}
       {formOpen && (
@@ -275,10 +143,10 @@ export default function FloatingActions() {
       )}
 
       {/* Backdrop for mobile */}
-      {(chatOpen || formOpen) && (
+      {formOpen && (
         <div
           className="fixed inset-0 z-[98] bg-black/20 backdrop-blur-[2px] md:hidden"
-          onClick={() => { setChatOpen(false); setFormOpen(false); }}
+          onClick={() => setFormOpen(false)}
         />
       )}
     </>

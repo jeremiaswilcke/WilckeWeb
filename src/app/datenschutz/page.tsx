@@ -138,21 +138,31 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">10. Telegram-Chat</h2>
+              <h2 className="text-lg font-bold text-text mb-3">10. Live-Chat (Tawk.to)</h2>
               <p>
-                Diese Website bietet eine Chat-Funktion, &uuml;ber die Sie uns direkt
-                Nachrichten senden k&ouml;nnen. Die Nachricht wird &uuml;ber die Telegram
-                Bot API (Telegram FZ-LLC, Dubai, VAE) an uns weitergeleitet.
+                Diese Website nutzt den Live-Chat-Dienst <strong>Tawk.to</strong>
+                (Tawk.to Inc., 187 East Warm Springs Rd, Las Vegas, NV 89119, USA).
+                Der Chat erm&ouml;glicht die direkte Kommunikation mit uns in Echtzeit.
               </p>
               <p className="mt-2">
-                Verarbeitete Daten: Ihr eingegebener Name (optional) und Ihre Nachricht.
-                Es werden keine Cookies gesetzt und keine Telegram-Konten verkn&uuml;pft.
-                Die Nachricht wird ausschlie&szlig;lich an unseren privaten
-                Telegram-Account &uuml;bermittelt.
+                Beim Starten des Chats werden folgende Daten verarbeitet:
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>IP-Adresse und Standort (anonymisiert)</li>
+                <li>Browser- und Ger&auml;teinformationen</li>
+                <li>Chatnachrichten und ggf. eingegebene Kontaktdaten</li>
+              </ul>
+              <p className="mt-2">
+                Tawk.to setzt eigene Cookies, um die Chat-Sitzung aufrechtzuerhalten.
               </p>
               <p className="mt-2">
-                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktive Nutzung)
-                und Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Ma&szlig;nahmen).
+                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktive Nutzung des Chats)
+                und Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Ma&szlig;nahmen).<br />
+                <strong>Drittlandtransfer:</strong> USA. Tawk.to unterliegt dem EU-U.S. Data Privacy Framework.<br />
+                <strong>Datenschutz Tawk.to:</strong>{" "}
+                <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
+                  tawk.to/privacy-policy
+                </a>
               </p>
             </section>
 
