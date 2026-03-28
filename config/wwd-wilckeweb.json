@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "site": {
+    "name": "WilckeWeb",
+    "slug": "wilckeweb",
+    "api_prefix": "wwd",
+    "cors_origins": ["http://localhost:3000", "https://wilckeweb.de"]
+  },
+  "pages": {
+    "auftraege": {
+      "label": "Auftr\u00e4ge",
+      "menu_icon": "dashicons-portfolio",
+      "sections": {
+        "projekt": {
+          "type": "cpt",
+          "label": "Projekte",
+          "label_singular": "Projekt",
+          "menu_icon": "dashicons-building",
+          "fields": {
+            "kunde_name": { "type": "text", "label": "Kundenname", "required": true },
+            "kunde_email": { "type": "email", "label": "E-Mail", "required": true },
+            "kunde_telefon": { "type": "text", "label": "Telefon" },
+            "token": { "type": "text", "label": "Zugangstoken", "required": true },
+            "nachricht": { "type": "textarea", "label": "Kundennachricht" },
+            "konfiguration": { "type": "textarea", "label": "Projektkonfiguration" },
+            "preis": { "type": "text", "label": "Richtpreis" },
+            "monatlich": { "type": "text", "label": "Monatlich" },
+            "status": {
+              "type": "select",
+              "label": "Projektstatus",
+              "options": [
+                "anfrage",
+                "planung",
+                "design",
+                "inhalte",
+                "launch",
+                "abgeschlossen"
+              ]
+            },
+            "status_notiz": { "type": "textarea", "label": "Status-Notiz (sichtbar f\u00fcr Kunde)" },
+            "notizen_intern": { "type": "editor", "label": "Interne Notizen" }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,8 @@ const navLinks = [
   { href: "#leistungen", label: "Leistungen" },
   { href: "#ablauf", label: "So funktioniert's" },
   { href: "#rechner", label: "Preisrechner" },
-  { href: "#beispiele", label: "Beispiele" },
+  { href: "#technologie", label: "Technologie" },
+  { href: "#beispiele", label: "Referenz" },
 ];
 
 export default function Header() {

@@ -5,6 +5,7 @@ import USP from "@/components/USP";
 import Process from "@/components/Process";
 import Calculator from "@/components/Calculator";
 import ContactForm from "@/components/ContactForm";
+import Technology from "@/components/Technology";
 import Examples from "@/components/Examples";
 import Trust from "@/components/Trust";
 import FinalCTA from "@/components/FinalCTA";
@@ -22,6 +23,7 @@ export default function Home() {
         <Process />
         <Calculator />
         <ContactForm />
+        <Technology />
         <Examples />
         <Trust />
         <FinalCTA />

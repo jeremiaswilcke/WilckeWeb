@@ -15,29 +15,46 @@ export default function ContactForm() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [projektUrl, setProjektUrl] = useState("");
+  const [error, setError] = useState("");
 
   const summary = getSummaryText();
   const total = getTotal();
   const monthly = getMonthly();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    setError("");
 
-    // Build mailto with project details
-    const subject = encodeURIComponent(`Projektanfrage über WilckeWeb — ${formatPrice(total)}`);
-    const body = encodeURIComponent(
-      `Hallo,\n\nich interessiere mich für ein Website-Projekt.\n\n` +
-      `--- Meine Angaben ---\n` +
-      `Name: ${form.name}\n` +
-      `E-Mail: ${form.email}\n` +
-      (form.phone ? `Telefon: ${form.phone}\n` : "") +
-      (form.message ? `\nNachricht:\n${form.message}\n` : "") +
-      `\n--- Projektkonfiguration ---\n${summary}\n\n` +
-      `---\nDiese Anfrage wurde über den WilckeWeb-Konfigurator erstellt.`
-    );
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+          summary,
+          total: formatPrice(total),
+          monthly: monthly > 0 ? `${formatPrice(monthly)}/Monat` : "",
+        }),
+      });
 
-    window.location.href = `mailto:kontakt@wilckeweb.de?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      const data = await res.json();
+      if (res.ok) {
+        setSubmitted(true);
+        setProjektUrl(data.projektUrl || "");
+      } else {
+        setError(data.error || "Ein Fehler ist aufgetreten.");
+      }
+    } catch {
+      setError("Verbindungsfehler. Bitte versuchen Sie es erneut.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -115,18 +132,36 @@ export default function ContactForm() {
 
               <button
                 type="submit"
+                disabled={submitting}
                 className="inline-flex items-center justify-center gap-2 font-semibold text-[0.95rem] px-8 py-4 rounded-full
                   bg-teal text-white hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(86,160,168,0.3)]
-                  transition-all duration-300 w-full sm:w-auto"
+                  transition-all duration-300 w-full sm:w-auto disabled:opacity-50"
               >
-                Projekt unverbindlich anfragen
-                <ArrowRightIcon />
+                {submitting ? "Wird gesendet ..." : "Projekt unverbindlich anfragen"}
+                {!submitting && <ArrowRightIcon />}
               </button>
 
+              {error && (
+                <p className="text-coral text-sm font-medium">{error}</p>
+              )}
+
               {submitted && (
-                <p className="text-teal text-sm font-medium">
-                  Ihr E-Mail-Programm sollte sich geöffnet haben. Falls nicht, schreiben Sie direkt an kontakt@wilckeweb.de.
-                </p>
+                <div className="bg-teal/10 rounded-2xl p-5">
+                  <p className="text-teal font-semibold">
+                    Ihre Anfrage wurde erfolgreich gesendet!
+                  </p>
+                  <p className="text-teal/80 text-sm mt-1">
+                    Sie erhalten in Kürze eine Bestätigungsmail mit einem Link zu Ihrem Projektportal.
+                  </p>
+                  {projektUrl && (
+                    <a
+                      href={projektUrl}
+                      className="inline-block mt-3 text-sm font-semibold text-teal underline underline-offset-2"
+                    >
+                      Direkt zum Projektportal &rarr;
+                    </a>
+                  )}
+                </div>
               )}
             </form>
           </FadeIn>

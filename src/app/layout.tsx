@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "WilckeWeb — Websites, die klar wirken und gut aussehen",
@@ -27,7 +28,10 @@ export default function RootLayout({
         />
         <link rel="icon" href="/wilckeweb_logo.png" type="image/png" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }
