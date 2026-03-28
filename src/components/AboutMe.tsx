@@ -16,10 +16,9 @@ export default function AboutMe() {
       const rect = section.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Start transition when section enters viewport,
-      // complete when image area is ~centered
+      // Transition runs while the section scrolls through the viewport
       const start = windowHeight * 0.8;
-      const end = windowHeight * 0.1;
+      const end = -rect.height * 0.3;
 
       if (rect.top >= start) {
         setProgress(0);
@@ -35,6 +34,12 @@ export default function AboutMe() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Phase 1 (0–0.5): Photo fades out, Sketch-with-BG fades in
+  // Phase 2 (0.5–1): Sketch-with-BG fades out, Sketch-no-BG remains
+  const photoOpacity = Math.max(0, 1 - progress * 2);         // 1→0 over 0–0.5
+  const sketchBgOpacity = Math.min(1, progress * 2) * Math.max(0, 1 - (progress - 0.5) * 2); // 0→1→0
+  // sketchNoBg is always visible at bottom, revealed as layers above fade
+
   return (
     <section
       ref={sectionRef}
@@ -43,9 +48,9 @@ export default function AboutMe() {
     >
       <div className="max-w-[1000px] mx-auto px-6">
         <div className="grid grid-cols-[1fr_1.2fr] gap-16 items-center max-md:grid-cols-1 max-md:gap-10">
-          {/* Image with scroll transition */}
+          {/* Image with 3-stage scroll transition */}
           <div className="relative w-full aspect-square max-w-[400px] mx-auto max-md:max-w-[320px]">
-            {/* Sketch layer (bottom — visible when progress = 1) */}
+            {/* Layer 1 (bottom): Sketch without BG — final state */}
             <Image
               src="/about-sketch.png"
               alt="Jeremias Wilcke — Sketch"
@@ -54,13 +59,27 @@ export default function AboutMe() {
               sizes="(max-width: 768px) 320px, 400px"
             />
 
-            {/* Photo layer (top — fades out as progress increases) */}
+            {/* Layer 2 (middle): Sketch with BG — visible mid-scroll */}
             <div
-              className="absolute inset-0 rounded-2xl overflow-hidden"
-              style={{ opacity: 1 - progress }}
+              className="absolute inset-0"
+              style={{ opacity: sketchBgOpacity }}
             >
               <Image
-                src="/about-photo.jpg"
+                src="/about-sketch-bg.png"
+                alt="Jeremias Wilcke — Sketch"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 320px, 400px"
+              />
+            </div>
+
+            {/* Layer 3 (top): Color photo — initial state */}
+            <div
+              className="absolute inset-0 rounded-2xl overflow-hidden"
+              style={{ opacity: photoOpacity }}
+            >
+              <Image
+                src="/about-photo.png"
                 alt="Jeremias Wilcke"
                 fill
                 className="object-cover object-center"
@@ -71,12 +90,12 @@ export default function AboutMe() {
 
             {/* Subtle glow behind image */}
             <div
-              className="absolute -inset-4 rounded-3xl -z-10 transition-opacity duration-500"
+              className="absolute -inset-4 rounded-3xl -z-10"
               style={{
                 background: progress < 0.5
                   ? "radial-gradient(circle, rgba(86,160,168,0.12) 0%, transparent 70%)"
                   : "radial-gradient(circle, rgba(249,125,115,0.08) 0%, transparent 70%)",
-                opacity: 0.8,
+                opacity: 0.6 + (1 - progress) * 0.4,
               }}
             />
           </div>
