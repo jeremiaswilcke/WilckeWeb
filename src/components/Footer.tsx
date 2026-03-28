@@ -3,15 +3,15 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="pt-16 pb-10 border-t border-line">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <div className="flex justify-between items-start gap-12 flex-wrap max-md:flex-col max-md:gap-8">
           <div>
             <Image
               src="/wilckeweb_logo.png"
               alt="WilckeWeb"
-              width={140}
-              height={35}
-              className="h-8 w-auto mb-3"
+              width={200}
+              height={50}
+              className="h-12 w-auto mb-4 drop-shadow-[0_2px_8px_rgba(86,160,168,0.15)]"
             />
             <p className="text-muted text-[0.88rem] max-w-[280px] leading-relaxed">
               Moderne Websites — klar geplant, fair kalkuliert, individuell

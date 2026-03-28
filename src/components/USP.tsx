@@ -18,7 +18,7 @@ const usps = [
 export default function USP() {
   return (
     <section className="py-[100px] max-md:py-16">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <FadeIn>
           <div className="text-center max-w-[680px] mx-auto mb-14">
             <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">

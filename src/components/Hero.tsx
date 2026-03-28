@@ -10,7 +10,7 @@ import {
 export default function Hero() {
   return (
     <section className="pt-[calc(80px+140px)] pb-[140px] max-md:pt-[calc(72px+64px)] max-md:pb-20 flex items-center min-h-[90vh] max-md:min-h-0">
-      <div className="max-w-[1200px] mx-auto px-6 w-full">
+      <div className="max-w-[1440px] mx-auto px-6 w-full">
         <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 items-center max-lg:grid-cols-1 max-lg:gap-12">
           {/* Copy */}
           <div className="max-w-[640px]">

@@ -4,10 +4,10 @@ import { ArrowRightIcon } from "./Icons";
 export default function FinalCTA() {
   return (
     <section className="py-[140px] max-md:py-20 text-center">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <FadeIn>
           <div
-            className="max-w-[680px] mx-auto py-[72px] px-12 max-md:py-12 max-md:px-7
+            className="max-w-[900px] mx-auto py-[72px] px-12 max-md:py-12 max-md:px-7
               rounded-3xl bg-gradient-to-br from-anthracite to-[#2a2a2a] text-white
               shadow-[0_24px_60px_rgba(63,63,63,0.1)] relative overflow-hidden"
           >

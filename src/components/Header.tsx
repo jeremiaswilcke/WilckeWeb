@@ -32,14 +32,14 @@ export default function Header() {
           : ""
       }`}
     >
-      <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center justify-between gap-8">
+      <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between gap-8">
         <a href="#" className="flex-shrink-0">
           <Image
             src="/wilckeweb_logo.png"
             alt="WilckeWeb"
-            width={160}
-            height={40}
-            className="h-9 w-auto"
+            width={200}
+            height={50}
+            className="h-12 w-auto drop-shadow-[0_2px_8px_rgba(86,160,168,0.15)] hover:drop-shadow-[0_4px_16px_rgba(86,160,168,0.25)] transition-all duration-300"
             priority
           />
         </a>

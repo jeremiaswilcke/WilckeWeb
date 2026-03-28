@@ -67,7 +67,7 @@ const features = [
 export default function Technology() {
   return (
     <section id="technologie" className="py-[140px] max-md:py-20 bg-gradient-to-b from-bg to-bg-soft">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <FadeIn>
           <div className="text-center max-w-[720px] mx-auto mb-16">
             <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">

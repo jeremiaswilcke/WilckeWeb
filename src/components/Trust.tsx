@@ -30,7 +30,7 @@ export default function Trust() {
       id="vertrauen"
       className="py-[140px] max-md:py-20 bg-white border-t border-b border-line"
     >
-      <div className="max-w-[720px] mx-auto px-6 text-center">
+      <div className="max-w-[1000px] mx-auto px-6 text-center">
         <FadeIn>
           <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">
             Warum WilckeWeb

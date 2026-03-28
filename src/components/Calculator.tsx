@@ -69,7 +69,7 @@ export default function Calculator() {
       id="rechner"
       className="py-[140px] max-md:py-20 bg-white border-t border-b border-line"
     >
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <FadeIn>
           <div className="text-center max-w-[680px] mx-auto mb-16">
             <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">
