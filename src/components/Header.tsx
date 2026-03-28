@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
-  { href: "#leistungen", label: "Leistungen" },
-  { href: "#ablauf", label: "So funktioniert's" },
-  { href: "#rechner", label: "Preisrechner" },
-  { href: "#technologie", label: "Technologie" },
-  { href: "#beispiele", label: "Referenz" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#ablauf", label: "So funktioniert's" },
+  { href: "/#rechner", label: "Preisrechner" },
+  { href: "/#technologie", label: "Technologie" },
+  { href: "/#beispiele", label: "Referenz" },
 ];
 
 export default function Header() {
@@ -33,7 +33,7 @@ export default function Header() {
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between gap-8">
-        <a href="#" className="flex-shrink-0">
+        <a href="/" className="flex-shrink-0">
           <Image
             src="/wilckeweb_logo.png"
             alt="WilckeWeb"
@@ -69,7 +69,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#kontakt"
+            href="/#kontakt"
             onClick={handleNavClick}
             className="text-[0.88rem] font-semibold px-6 py-2.5 rounded-full bg-teal text-white
               hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(86,160,168,0.3)]

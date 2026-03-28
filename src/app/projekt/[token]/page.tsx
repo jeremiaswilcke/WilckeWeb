@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import WhatsAppButton from "@/components/WhatsAppButton";
+// FloatingActions is already in the layout
 
 const STEPS = [
   {
@@ -313,7 +313,6 @@ export default function ProjektPage() {
         </div>
       </main>
 
-      <WhatsAppButton />
     </div>
   );
 }
