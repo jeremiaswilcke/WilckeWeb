@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/#rechner", label: "Preisrechner" },
   { href: "/#technologie", label: "Technologie" },
   { href: "/#beispiele", label: "Referenz" },
+  { href: "/#ueber-mich", label: "Über mich" },
 ];
 
 export default function Header() {

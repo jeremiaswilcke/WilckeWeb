@@ -29,9 +29,27 @@ export default function StructuredData() {
     ],
     founder: {
       "@type": "Person",
+      "@id": "https://wilckeweb.org/#person",
       name: "Jeremias Wilcke",
       jobTitle: "Webentwickler & Designer",
       url: "https://wilckeweb.org",
+      image: "https://wilckeweb.org/about-photo.png",
+      worksFor: { "@id": "https://wilckeweb.org/#business" },
+      knowsAbout: [
+        "Next.js",
+        "Headless WordPress",
+        "Webdesign",
+        "SEO",
+        "Answer Engine Optimization",
+        "React",
+        "TypeScript",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Mauerbach",
+        postalCode: "3001",
+        addressCountry: "AT",
+      },
     },
     priceRange: "€€",
     currenciesAccepted: "EUR",
@@ -137,6 +155,14 @@ export default function StructuredData() {
         acceptedAnswer: {
           "@type": "Answer",
           text: "Ja! WilckeWeb optimiert Websites nicht nur für Google (SEO), sondern auch für KI-Assistenten wie ChatGPT, Claude und Gemini. Durch strukturierte Daten, klare Entitäten und semantische Auszeichnung wird Ihr Unternehmen zur Quelle, die KI-Modelle zitieren und empfehlen. Das nennt sich Answer Engine Optimization (AEO).",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Wer steckt hinter WilckeWeb?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Hinter WilckeWeb steht Jeremias Wilcke, Webentwickler und Designer aus Mauerbach bei Wien. Er betreut jedes Projekt persönlich — von der Konzeption über das Design bis zur technischen Umsetzung mit Next.js und Headless WordPress. Kein Callcenter, kein anonymes Team, sondern ein direkter Ansprechpartner.",
         },
       },
       {
