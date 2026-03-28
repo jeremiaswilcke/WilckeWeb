@@ -44,7 +44,7 @@ export default function FloatingActions() {
   }
 
   async function handleChatSend() {
-    if (!chatMessage.trim()) return;
+    if (!chatMessage.trim() || !chatEmail.trim()) return;
     setChatSending(true);
     try {
       const res = await fetch("/api/telegram", {
@@ -96,7 +96,7 @@ export default function FloatingActions() {
               ? "bg-teal-dark text-white"
               : "bg-teal text-white hover:scale-110 hover:shadow-[0_6px_28px_rgba(86,160,168,0.5)]"
             }`}
-          aria-label="Chat"
+          aria-label="Kontakt über Telegram"
         >
           {chatOpen ? (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -130,7 +130,7 @@ export default function FloatingActions() {
         <div className="fixed right-20 max-md:right-16 top-1/2 -translate-y-1/2 z-[99] animate-scaleIn">
           <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] border border-line w-[320px] overflow-hidden">
             <div className="bg-teal text-white px-5 py-4">
-              <div className="font-bold text-[0.95rem]">Live Chat</div>
+              <div className="font-bold text-[0.95rem]">Kontakt über Telegram</div>
               <div className="text-white/80 text-[0.8rem]">Antwort meistens innerhalb einer Stunde</div>
             </div>
             <div className="p-5">
@@ -167,9 +167,10 @@ export default function FloatingActions() {
                   />
                   <input
                     type="email"
+                    required
                     value={chatEmail}
                     onChange={(e) => setChatEmail(e.target.value)}
-                    placeholder="E-Mail für Rückantwort (optional)"
+                    placeholder="Ihre E-Mail-Adresse"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
                       focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
                   />
@@ -187,7 +188,7 @@ export default function FloatingActions() {
                     />
                     <button
                       onClick={handleChatSend}
-                      disabled={chatSending || !chatMessage.trim()}
+                      disabled={chatSending || !chatMessage.trim() || !chatEmail.trim()}
                       className="w-11 h-11 shrink-0 rounded-full bg-teal text-white flex items-center justify-center
                         hover:scale-105 hover:shadow-[0_4px_16px_rgba(86,160,168,0.4)]
                         transition-all duration-300 disabled:opacity-40"
