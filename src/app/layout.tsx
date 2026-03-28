@@ -2,11 +2,74 @@ import type { Metadata } from "next";
 import "./globals.css";
 import FloatingActions from "@/components/FloatingActions";
 import CookieBanner from "@/components/CookieBanner";
+import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "WilckeWeb — Websites, die klar wirken und gut aussehen",
+  metadataBase: new URL("https://wilckeweb.org"),
+  title: {
+    default: "WilckeWeb — Webdesign & Entwicklung aus Österreich | Next.js + WordPress",
+    template: "%s — WilckeWeb",
+  },
   description:
-    "Planen Sie Ihre neue Website einfach, transparent und professionell. WilckeWeb begleitet Sie von der Idee bis zur fertigen Seite.",
+    "WilckeWeb erstellt moderne, blitzschnelle Websites mit Next.js und Headless WordPress. Transparente Preise ab 790 €, persönliche Beratung, SEO & AEO optimiert. Aus Mauerbach bei Wien.",
+  keywords: [
+    "Webdesign Österreich",
+    "Webdesign Wien",
+    "Website erstellen lassen",
+    "Next.js Website",
+    "Headless WordPress",
+    "Webentwicklung Österreich",
+    "WilckeWeb",
+    "WordPress Agentur",
+    "SEO optimierte Website",
+    "AEO Answer Engine Optimization",
+    "Website Kosten Österreich",
+    "Webdesigner Niederösterreich",
+    "moderne Website erstellen",
+    "schnelle Website",
+  ],
+  authors: [{ name: "Jeremias Wilcke", url: "https://wilckeweb.org" }],
+  creator: "WilckeWeb — Jeremias Wilcke",
+  publisher: "WilckeWeb",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "de_AT",
+    url: "https://wilckeweb.org",
+    siteName: "WilckeWeb",
+    title: "WilckeWeb — Moderne Websites mit Next.js & Headless WordPress",
+    description:
+      "Blitzschnelle Websites, transparent kalkuliert, persönlich betreut. Ab 790 € netto. Webdesign & Entwicklung aus Österreich.",
+    images: [
+      {
+        url: "/wilckeweb_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "WilckeWeb — Webdesign & Entwicklung",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WilckeWeb — Webdesign & Entwicklung aus Österreich",
+    description:
+      "Moderne Websites mit Next.js & WordPress. Transparente Preise, persönliche Beratung.",
+    images: ["/wilckeweb_logo.png"],
+  },
+  alternates: {
+    canonical: "https://wilckeweb.org",
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -28,6 +91,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link rel="icon" href="/wilckeweb_logo.png" type="image/png" />
+        <StructuredData />
       </head>
       <body className="antialiased">
         {children}
