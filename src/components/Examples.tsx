@@ -81,13 +81,13 @@ export default function Examples() {
           onClick={() => setOpen(false)}
         >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-[fadeIn_0.2s_ease]" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" />
 
           {/* Modal */}
           <div
             onClick={(e) => e.stopPropagation()}
             className="relative bg-white rounded-3xl max-w-[900px] w-full max-h-[90vh] overflow-y-auto
-              shadow-[0_32px_80px_rgba(0,0,0,0.3)] animate-[scaleIn_0.25s_ease]"
+              shadow-[0_32px_80px_rgba(0,0,0,0.3)] animate-scaleIn"
           >
             {/* Close Button */}
             <button
@@ -157,16 +157,6 @@ export default function Examples() {
         </div>
       )}
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.95) translateY(8px); }
-          to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-      `}</style>
     </>
   );
 }
