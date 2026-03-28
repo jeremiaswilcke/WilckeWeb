@@ -138,7 +138,26 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">10. Cookies</h2>
+              <h2 className="text-lg font-bold text-text mb-3">10. Telegram-Chat</h2>
+              <p>
+                Diese Website bietet eine Chat-Funktion, &uuml;ber die Sie uns direkt
+                Nachrichten senden k&ouml;nnen. Die Nachricht wird &uuml;ber die Telegram
+                Bot API (Telegram FZ-LLC, Dubai, VAE) an uns weitergeleitet.
+              </p>
+              <p className="mt-2">
+                Verarbeitete Daten: Ihr eingegebener Name (optional) und Ihre Nachricht.
+                Es werden keine Cookies gesetzt und keine Telegram-Konten verkn&uuml;pft.
+                Die Nachricht wird ausschlie&szlig;lich an unseren privaten
+                Telegram-Account &uuml;bermittelt.
+              </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktive Nutzung)
+                und Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Ma&szlig;nahmen).
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-text mb-3">11. Cookies</h2>
               <p>Diese Website verwendet Cookies.</p>
               <h3 className="font-semibold text-text mt-4 mb-1">Essenzielle Cookies</h3>
               <p>
@@ -156,7 +175,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">11. Ihre Rechte</h2>
+              <h2 className="text-lg font-bold text-text mb-3">12. Ihre Rechte</h2>
               <p>Sie haben gem&auml;&szlig; DSGVO folgende Rechte:</p>
               <ul className="list-disc pl-5 space-y-1 mt-2">
                 <li><strong>Auskunft</strong> (Art. 15 DSGVO)</li>
@@ -174,7 +193,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">12. Beschwerderecht</h2>
+              <h2 className="text-lg font-bold text-text mb-3">13. Beschwerderecht</h2>
               <p>
                 <strong>&Ouml;sterreichische Datenschutzbeh&ouml;rde</strong><br />
                 Barichgasse 40-42, 1030 Wien<br />
@@ -185,7 +204,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">13. Aktualit&auml;t</h2>
+              <h2 className="text-lg font-bold text-text mb-3">14. Aktualit&auml;t</h2>
               <p>
                 Diese Datenschutzerkl&auml;rung hat den Stand M&auml;rz 2026.
               </p>
