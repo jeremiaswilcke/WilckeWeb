@@ -12,6 +12,7 @@ export default function FloatingActions() {
   // Chat (Telegram direct)
   const [chatMessage, setChatMessage] = useState("");
   const [chatName, setChatName] = useState("");
+  const [chatEmail, setChatEmail] = useState("");
   const [chatSent, setChatSent] = useState(false);
   const [chatSending, setChatSending] = useState(false);
 
@@ -49,7 +50,7 @@ export default function FloatingActions() {
       const res = await fetch("/api/telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: chatMessage, name: chatName }),
+        body: JSON.stringify({ message: chatMessage, name: chatName, email: chatEmail }),
       });
       if (res.ok) {
         setChatSent(true);
@@ -161,6 +162,14 @@ export default function FloatingActions() {
                     value={chatName}
                     onChange={(e) => setChatName(e.target.value)}
                     placeholder="Ihr Name (optional)"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
+                      focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
+                  />
+                  <input
+                    type="email"
+                    value={chatEmail}
+                    onChange={(e) => setChatEmail(e.target.value)}
+                    placeholder="E-Mail für Rückantwort (optional)"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong bg-white text-text text-[0.85rem]
                       focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal transition-all duration-300"
                   />

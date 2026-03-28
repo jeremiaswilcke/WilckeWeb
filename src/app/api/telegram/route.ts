@@ -5,7 +5,7 @@ const CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, name } = await req.json();
+    const { message, name, email } = await req.json();
 
     if (!message?.trim()) {
       return NextResponse.json(
@@ -22,13 +22,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const text = [
+    const lines = [
       `💬 *Neue Nachricht von der Website*`,
       "",
       name ? `*Von:* ${name}` : "*Von:* Besucher",
-      "",
-      message,
-    ].join("\n");
+    ];
+    if (email) lines.push(`*E-Mail:* ${email}`);
+    lines.push("", message);
+    const text = lines.join("\n");
 
     const res = await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
