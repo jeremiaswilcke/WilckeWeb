@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/#technologie", label: "Technologie" },
   { href: "/#beispiele", label: "Referenz" },
   { href: "/#ueber-mich", label: "Über mich" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Header() {
