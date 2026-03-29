@@ -3,7 +3,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Impressum — WilckeWeb",
+  title: "Impressum",
+  description:
+    "Impressum von WilckeWeb — Jeremias Wilcke, Webdesign & Entwicklung aus Mauerbach bei Wien, Österreich.",
+  alternates: {
+    canonical: "https://wilckeweb.org/impressum",
+  },
+  openGraph: {
+    title: "Impressum — WilckeWeb",
+    description: "Angaben gemäß § 5 E-Commerce-Gesetz: WilckeWeb, Jeremias Wilcke, Mauerbach.",
+    url: "https://wilckeweb.org/impressum",
+  },
 };
 
 export default function Impressum() {

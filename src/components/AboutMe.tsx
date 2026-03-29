@@ -39,13 +39,7 @@ export default function AboutMe() {
       id="ueber-mich"
       className="py-[140px] max-md:py-20 bg-white border-t border-b border-line"
       aria-label="Über Jeremias Wilcke — Gründer von WilckeWeb"
-      itemScope
-      itemType="https://schema.org/Person"
     >
-      <meta itemProp="name" content="Jeremias Wilcke" />
-      <meta itemProp="jobTitle" content="Webentwickler & Designer" />
-      <meta itemProp="url" content="https://wilckeweb.org" />
-      <meta itemProp="image" content="https://wilckeweb.org/about-photo.png" />
 
       <div className="max-w-[1440px] mx-auto px-6">
         <div className="grid grid-cols-[1fr_1fr] gap-20 items-center max-lg:grid-cols-1 max-lg:gap-12">
@@ -95,10 +89,7 @@ export default function AboutMe() {
               <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-coral mb-4">
                 Über mich
               </span>
-              <h2
-                className="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight tracking-tight mb-6"
-                itemProp="description"
-              >
+              <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight tracking-tight mb-6">
                 Jeremias Wilcke —<br />
                 Webentwickler aus Österreich
               </h2>

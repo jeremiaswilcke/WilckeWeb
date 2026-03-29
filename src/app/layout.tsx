@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import FloatingActions from "@/components/FloatingActions";
 import TawkChat from "@/components/TawkChat";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieBanner from "@/components/CookieBanner";
 import StructuredData from "@/components/StructuredData";
 
@@ -73,6 +74,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://wilckeweb.org",
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION,
+  },
   category: "technology",
 };
 
@@ -98,6 +102,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
         {children}
         <FloatingActions />
         <TawkChat />

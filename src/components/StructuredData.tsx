@@ -60,7 +60,9 @@ export default function StructuredData() {
       opens: "09:00",
       closes: "18:00",
     },
-    sameAs: [],
+    sameAs: [
+      "https://github.com/jeremiaswilcke",
+    ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Webdesign Leistungen",
@@ -176,6 +178,83 @@ export default function StructuredData() {
     ],
   };
 
+  const howTo = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Wie entsteht eine Website mit WilckeWeb?",
+    description:
+      "In vier einfachen Schritten von der Idee zur fertigen Website — persönlich betreut, transparent kalkuliert.",
+    totalTime: "P3W",
+    estimatedCost: {
+      "@type": "MonetaryAmount",
+      currency: "EUR",
+      value: "790",
+    },
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Bedarf klären",
+        text: "Nutzen Sie den Preisrechner oder schreiben Sie direkt. Gemeinsam finden wir heraus, was Sie brauchen.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Angebot erhalten",
+        text: "Sie bekommen ein klares, verständliches Angebot — transparent, fair und ohne versteckte Kosten.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Website gestalten",
+        text: "Design, Inhalte und Funktionen werden umgesetzt. Sie sind eingebunden und sehen den Fortschritt im Projektportal.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Online gehen",
+        text: "Ihre Website geht live. Auf Wunsch mit laufender Betreuung, damit alles aktuell und sicher bleibt.",
+      },
+    ],
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Startseite",
+        item: "https://wilckeweb.org",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Leistungen",
+        item: "https://wilckeweb.org/#leistungen",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Preisrechner",
+        item: "https://wilckeweb.org/#rechner",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Über mich",
+        item: "https://wilckeweb.org/#ueber-mich",
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Kontakt",
+        item: "https://wilckeweb.org/#kontakt",
+      },
+    ],
+  };
+
   return (
     <>
       <script
@@ -189,6 +268,14 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
     </>
   );

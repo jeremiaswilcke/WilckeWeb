@@ -3,7 +3,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Datenschutzerkl\u00e4rung — WilckeWeb",
+  title: "Datenschutzerklärung",
+  description:
+    "Datenschutzerklärung von WilckeWeb — Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.",
+  alternates: {
+    canonical: "https://wilckeweb.org/datenschutz",
+  },
+  openGraph: {
+    title: "Datenschutzerklärung — WilckeWeb",
+    description: "Informationen zum Datenschutz bei WilckeWeb gemäß DSGVO.",
+    url: "https://wilckeweb.org/datenschutz",
+  },
 };
 
 export default function Datenschutz() {
@@ -109,7 +119,33 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">8. Google Fonts</h2>
+              <h2 className="text-lg font-bold text-text mb-3">8. Google Analytics 4</h2>
+              <p>
+                Diese Website verwendet <strong>Google Analytics 4</strong> (Google Ireland Limited,
+                Gordon House, Barrow Street, Dublin 4, Irland) zur Analyse des Nutzerverhaltens.
+                IP-Adressen werden anonymisiert (<code>anonymize_ip: true</code>).
+              </p>
+              <p className="mt-2">
+                Google Analytics setzt Cookies, um wiederkehrende Besucher zu erkennen
+                und das Nutzungsverhalten auszuwerten. Die Einbindung erfolgt nur mit
+                Ihrer Einwilligung &uuml;ber den Cookie-Banner.
+              </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).<br />
+                <strong>Drittlandtransfer:</strong> EU-U.S. Data Privacy Framework.<br />
+                <strong>Datenschutz Google:</strong>{" "}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
+                  policies.google.com/privacy
+                </a><br />
+                <strong>Opt-Out:</strong>{" "}
+                <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
+                  Google Analytics Opt-Out Browser Add-on
+                </a>
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-text mb-3">9. Google Fonts</h2>
               <p>
                 Diese Website nutzt <strong>Google Fonts</strong>. Beim Aufruf werden
                 Schriftarten von Google-Servern geladen. Dabei wird Ihre IP-Adresse
@@ -126,7 +162,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">9. WhatsApp-Kontakt</h2>
+              <h2 className="text-lg font-bold text-text mb-3">10. WhatsApp-Kontakt</h2>
               <p>
                 Diese Website enth&auml;lt einen Link zur Kontaktaufnahme &uuml;ber
                 WhatsApp (Meta Platforms Ireland Ltd.). Eine Daten&uuml;bermittlung
@@ -138,7 +174,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">10. Live-Chat (Tawk.to)</h2>
+              <h2 className="text-lg font-bold text-text mb-3">11. Live-Chat (Tawk.to)</h2>
               <p>
                 Diese Website nutzt den Live-Chat-Dienst <strong>Tawk.to</strong>
                 (Tawk.to Inc., 187 East Warm Springs Rd, Las Vegas, NV 89119, USA).
@@ -167,7 +203,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">11. Cookies</h2>
+              <h2 className="text-lg font-bold text-text mb-3">12. Cookies</h2>
               <p>Diese Website verwendet Cookies.</p>
               <h3 className="font-semibold text-text mt-4 mb-1">Essenzielle Cookies</h3>
               <p>
@@ -185,7 +221,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">12. Ihre Rechte</h2>
+              <h2 className="text-lg font-bold text-text mb-3">13. Ihre Rechte</h2>
               <p>Sie haben gem&auml;&szlig; DSGVO folgende Rechte:</p>
               <ul className="list-disc pl-5 space-y-1 mt-2">
                 <li><strong>Auskunft</strong> (Art. 15 DSGVO)</li>
@@ -203,7 +239,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">13. Beschwerderecht</h2>
+              <h2 className="text-lg font-bold text-text mb-3">14. Beschwerderecht</h2>
               <p>
                 <strong>&Ouml;sterreichische Datenschutzbeh&ouml;rde</strong><br />
                 Barichgasse 40-42, 1030 Wien<br />
@@ -214,7 +250,7 @@ export default function Datenschutz() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-text mb-3">14. Aktualit&auml;t</h2>
+              <h2 className="text-lg font-bold text-text mb-3">15. Aktualit&auml;t</h2>
               <p>
                 Diese Datenschutzerkl&auml;rung hat den Stand M&auml;rz 2026.
               </p>
