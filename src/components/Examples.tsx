@@ -28,9 +28,8 @@ const references: readonly Reference[] = [
   {
     title: "Ora Mundi",
     url: "https://oramundi.online",
-    image:
-      "https://image.thum.io/get/width/1000/crop/625/https://oramundi.online",
-    isLocalImage: false,
+    image: "/oramundi.png",
+    isLocalImage: true,
     category: "Gebet & Community",
     description:
       'Plattform für gemeinschaftliches Gebet mit dem Versprechen „Du betest nie allein" — mehrsprachig.',
@@ -39,9 +38,8 @@ const references: readonly Reference[] = [
   {
     title: "OrdoFinder",
     url: "https://ordofinder.app",
-    image:
-      "https://image.thum.io/get/width/1000/crop/625/https://ordofinder.app",
-    isLocalImage: false,
+    image: "/ordofinder.png",
+    isLocalImage: true,
     category: "Liturgie",
     description:
       "Bewertungs- und Suchplattform für Messen und Gemeinden — mit Kartenansicht und Reviewer-System.",
