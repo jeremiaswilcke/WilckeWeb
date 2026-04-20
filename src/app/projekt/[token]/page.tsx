@@ -41,6 +41,7 @@ interface ProjectData {
   kunde: string;
   status: string;
   statusNotiz: string;
+  fortschritt: number;
   preis: string;
   monatlich: string;
   konfiguration: string;
@@ -139,9 +140,20 @@ export default function ProjektPage() {
 
         {/* Status Timeline */}
         <div className="bg-surface rounded-3xl p-8 max-md:p-5 shadow-[0_2px_20px_rgba(0,0,0,0.04)] mb-8">
-          <h2 className="text-sm font-bold tracking-[0.1em] uppercase text-muted mb-8">
-            Fortschritt
-          </h2>
+          <div className="flex items-baseline justify-between mb-3">
+            <h2 className="text-sm font-bold tracking-[0.1em] uppercase text-muted">
+              Fortschritt
+            </h2>
+            <span className="text-3xl max-md:text-2xl font-bold text-coral tabular-nums">
+              {project.fortschritt}%
+            </span>
+          </div>
+          <div className="h-2 w-full rounded-full bg-line overflow-hidden mb-8">
+            <div
+              className="h-full bg-coral rounded-full transition-all duration-700"
+              style={{ width: `${Math.max(0, Math.min(100, project.fortschritt))}%` }}
+            />
+          </div>
 
           <div className="space-y-0">
             {STEPS.map((step, i) => {

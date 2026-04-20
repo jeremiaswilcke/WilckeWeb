@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findProjectByToken } from "@/lib/wp";
+import { findProjektByToken } from "@/lib/projekte";
 import { sendMail } from "@/lib/mail";
 
 export async function POST(
@@ -16,17 +16,16 @@ export async function POST(
     );
   }
 
-  const post = await findProjectByToken(token);
-  if (!post) {
+  const projekt = await findProjektByToken(token);
+  if (!projekt || projekt.status === "abgeschlossen") {
     return NextResponse.json(
       { error: "Projekt nicht gefunden." },
       { status: 404 }
     );
   }
 
-  const meta = post.project_meta || post.meta || {};
-  const kundeName = meta._wwd_kunde_name || name || "Kunde";
-  const kundeEmail = meta._wwd_kunde_email || "";
+  const kundeName = projekt.kunde_name || name || "Kunde";
+  const kundeEmail = projekt.kunde_email || "";
 
   await sendMail({
     to: process.env.SMTP_USER!,
@@ -38,7 +37,7 @@ export async function POST(
       "Nachricht:",
       message,
       "",
-      `Projekt verwalten: ${process.env.WP_URL}/wp-admin/edit.php?post_type=wwd_projekt`,
+      `Im Supabase Studio: https://supabase.com/dashboard/project/komelvvzecebppisuiar/editor`,
     ].join("\n"),
   });
 

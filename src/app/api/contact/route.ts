@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { wpFetch, generateToken } from "@/lib/wp";
+import { createProjekt } from "@/lib/projekte";
 import { sendMail } from "@/lib/mail";
 
 export async function POST(req: NextRequest) {
@@ -14,41 +14,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const token = generateToken();
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wilckeweb.de";
-    const projektUrl = `${siteUrl}/projekt/${token}`;
-
-    // Create project in WordPress
-    const wpRes = await wpFetch("/projekte", {
-      method: "POST",
-      body: JSON.stringify({
-        title: `Anfrage von ${name}`,
-        status: "publish",
-        meta: {
-          _wwd_kunde_name: name,
-          _wwd_kunde_email: email,
-          _wwd_kunde_telefon: phone || "",
-          _wwd_token: token,
-          _wwd_nachricht: message || "",
-          _wwd_konfiguration: summary || "",
-          _wwd_preis: total || "",
-          _wwd_monatlich: monthly || "",
-          _wwd_status: "anfrage",
-          _wwd_status_notiz: "",
-        },
-      }),
+    const created = await createProjekt({
+      kunde_name: name,
+      kunde_email: email,
+      kunde_telefon: phone,
+      nachricht: message,
+      konfiguration: summary,
+      preis: total,
+      monatlich: monthly,
     });
 
-    if (!wpRes.ok) {
-      const err = await wpRes.text();
-      console.error("WP error:", err);
+    if ("error" in created) {
+      console.error("Supabase insert error:", created.error);
       return NextResponse.json(
-        { error: "Projekt konnte nicht erstellt werden." },
+        { error: "Anfrage konnte nicht gespeichert werden." },
         { status: 500 }
       );
     }
 
-    // Send confirmation email to customer
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wilckeweb.org";
+    const projektUrl = `${siteUrl}/projekt/${created.token}`;
+
     await sendMail({
       to: email,
       subject: "Ihre Projektanfrage bei WilckeWeb",
@@ -73,7 +59,6 @@ export async function POST(req: NextRequest) {
         .join("\n"),
     });
 
-    // Send notification email to WilckeWeb
     await sendMail({
       to: process.env.SMTP_USER!,
       subject: `Neue Projektanfrage: ${name}`,
@@ -89,7 +74,6 @@ export async function POST(req: NextRequest) {
         `Richtpreis: ${total || "–"}`,
         monthly ? `Monatlich: ${monthly}` : "",
         "",
-        `Projekt verwalten: ${process.env.WP_URL}/wp-admin/edit.php?post_type=wwd_projekt`,
         `Kundenansicht: ${projektUrl}`,
       ]
         .filter(Boolean)
