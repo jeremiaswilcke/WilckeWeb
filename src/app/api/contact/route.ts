@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createProjekt } from "@/lib/projekte";
 import { sendMail } from "@/lib/mail";
 import { sendTelegramNotification } from "@/lib/telegram";
+import { buildConfirmationEmail } from "@/lib/email-templates";
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,28 +37,19 @@ export async function POST(req: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wilckeweb.org";
     const projektUrl = `${siteUrl}/projekt/${created.token}`;
 
+    const confirmation = buildConfirmationEmail({
+      name,
+      projektUrl,
+      summary,
+      total,
+      monthly,
+      siteUrl,
+    });
     await sendMail({
       to: email,
       subject: "Ihre Projektanfrage bei WilckeWeb",
-      text: [
-        `Hallo ${name},`,
-        "",
-        "vielen Dank für Ihre Anfrage! Wir haben alle Details erhalten und melden uns in Kürze bei Ihnen.",
-        "",
-        "Den aktuellen Status Ihres Projekts können Sie jederzeit hier verfolgen:",
-        projektUrl,
-        "",
-        "--- Ihre Konfiguration ---",
-        summary || "(keine Konfiguration übermittelt)",
-        "",
-        `Geschätzter Richtpreis: ${total || "–"}`,
-        monthly ? `Monatliche Betreuung: ${monthly}` : "",
-        "",
-        "Herzliche Grüße,",
-        "Ihr WilckeWeb-Team",
-      ]
-        .filter(Boolean)
-        .join("\n"),
+      text: confirmation.text,
+      html: confirmation.html,
     });
 
     await sendMail({
