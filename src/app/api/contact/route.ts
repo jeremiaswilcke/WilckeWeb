@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createProjekt } from "@/lib/projekte";
 import { sendMail } from "@/lib/mail";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 export async function POST(req: NextRequest) {
   try {
@@ -79,6 +80,21 @@ export async function POST(req: NextRequest) {
         .filter(Boolean)
         .join("\n"),
     });
+
+    const telegramLines = [
+      "*Neue Projektanfrage*",
+      "",
+      `*Von:* ${name}`,
+      `*E-Mail:* ${email}`,
+      phone ? `*Telefon:* ${phone}` : "",
+      total ? `*Richtpreis:* ${total}` : "",
+      monthly ? `*Monatlich:* ${monthly}` : "",
+      summary ? `\n*Konfiguration:*\n${summary}` : "",
+      message ? `\n*Nachricht:*\n${message}` : "",
+      "",
+      `*Projekt-Seite:* ${projektUrl}`,
+    ].filter(Boolean);
+    await sendTelegramNotification(telegramLines.join("\n"));
 
     return NextResponse.json({ success: true, projektUrl });
   } catch (error) {

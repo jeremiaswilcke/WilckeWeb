@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findProjektByToken } from "@/lib/projekte";
 import { sendMail } from "@/lib/mail";
+import { sendTelegramNotification } from "@/lib/telegram";
 
 export async function POST(
   req: NextRequest,
@@ -40,6 +41,16 @@ export async function POST(
       `Im Supabase Studio: https://supabase.com/dashboard/project/komelvvzecebppisuiar/editor`,
     ].join("\n"),
   });
+
+  await sendTelegramNotification(
+    [
+      `*Rückfrage zu Projekt* \`${token}\``,
+      "",
+      `*Von:* ${kundeName}${kundeEmail ? ` (${kundeEmail})` : ""}`,
+      "",
+      message,
+    ].join("\n")
+  );
 
   return NextResponse.json({ success: true });
 }
