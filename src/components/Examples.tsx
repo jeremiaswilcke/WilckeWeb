@@ -50,9 +50,8 @@ const references: readonly Reference[] = [
   {
     title: "Maria Brunn Digital",
     url: "https://mariabrunn-digital.at",
-    image:
-      "https://image.thum.io/get/width/1000/crop/625/https://mariabrunn-digital.at",
-    isLocalImage: false,
+    image: "/mariabrunn-digital.png",
+    isLocalImage: true,
     category: "Pfarrplattform",
     description:
       "Multimediale Plattform der Wiener Pfarre Mariabrunn — Predigten, Live-Gottesdienste, digitale Bibel.",
